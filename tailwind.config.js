@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -50,9 +51,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        fontFamily: {
-          sans: ["Noto Sans KR", "sans-serif"],
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -60,10 +58,6 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        blink: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0" },
-        }, //다이어리 부분
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -74,7 +68,6 @@ module.exports = {
         },
       },
       animation: {
-        blink: "blink 0.5s infinite", //다이어리 부분
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

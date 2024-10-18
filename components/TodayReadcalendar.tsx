@@ -8,7 +8,7 @@ import "react-day-picker/src/style.css";
 const CustomDayPicker = styled(DayPicker)`
   .rdp {
     --rdp-caption-font-size: 18px; /* 기본 캡션 폰트 크기 */
-    --rdp-accent-color: #3f4166; /* 선택된 날짜 배경 색 */
+    --rdp-accent-color: #0000ff; /* 선택된 날짜 배경 색 */
     --rdp-background-color: #e7edff; /* hover된 요소 배경 색 */
     --rdp-outline: 2px solid var(--rdp-accent-color); /* 포커스된 요소 테두리 */
     --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* 선택된 요소 테두리 */
@@ -22,7 +22,7 @@ const CustomDayPicker = styled(DayPicker)`
     justify-content: space-between;
     padding: 0;
     text-align: left;
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
   }
 
   .rdp-caption_label {
@@ -37,7 +37,7 @@ const CustomDayPicker = styled(DayPicker)`
     border: 0;
     font-family: inherit;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: var(--rdp-caption-font-size);
   }
 
   .rdp-head_cell {
@@ -58,17 +58,8 @@ const CustomDayPicker = styled(DayPicker)`
     box-sizing: border-box;
     font-weight: 500;
     border: 2px solid transparent;
-    border-radius: 10%;
+    border-radius: 30%;
     margin: 5px;
-  }
-
-  .rdp-nav {
-    display: none;
-  }
-
-  .rdp-day_today {
-    border: 2px solid red;
-    border-radius: 10%;
   }
 
   .rdp-day_today:not(.rdp-day_outside) {
@@ -76,10 +67,12 @@ const CustomDayPicker = styled(DayPicker)`
   }
 
   .mybookedclass {
-    background-color: #3f4166;
+    background-color: rgb(0, 38, 255);
     color: white;
   }
 
+  /* 반응형 디자인 적용 */
+  /* 16인치 맥북 (최소 1400px) */
   @media (min-width: 1400px) {
     .rdp {
       --rdp-cell-size: 100px;
@@ -87,15 +80,16 @@ const CustomDayPicker = styled(DayPicker)`
 
     .rdp-weeknumber,
     .rdp-day {
-      --rdp-cell-size: 80px;
+      --rdp-cell-size: 100px;
     }
 
     .mybookedclass {
-      --rdp-cell-size: 80px;
+      --rdp-cell-size: 100px;
       font-size: 1.4rem;
     }
   }
 
+  /* 14인치 맥북 (1200px ~ 1400px) */
   @media (min-width: 1200px) and (max-width: 1399px) {
     .rdp {
       --rdp-cell-size: 100px;
@@ -110,6 +104,7 @@ const CustomDayPicker = styled(DayPicker)`
     }
   }
 
+  /* 태블릿 (768px ~ 1199px) */
   @media (min-width: 768px) and (max-width: 1199px) {
     .rdp {
       --rdp-cell-size: 80px;
@@ -124,6 +119,7 @@ const CustomDayPicker = styled(DayPicker)`
     }
   }
 
+  /* 아이폰 및 작은 화면 (최대 767px) */
   @media (max-width: 767px) {
     .rdp {
       --rdp-cell-size: 60px;
@@ -140,6 +136,8 @@ const CustomDayPicker = styled(DayPicker)`
     }
   }
 `;
+
+const URL = "http://localhost:3001/schedule";
 
 export default function ReadCalendar({ dates }) {
   const classes = dates.map((date) => new Date(date.date));

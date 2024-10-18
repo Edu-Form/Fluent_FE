@@ -2,32 +2,12 @@ import "./styles.css";
 
 export default function Today() {
   return (
-    <div className="wrap  rounded-[30px] max-w-[900px] h-[470px] lg:flex hidden ">
+    <div className="wrap  rounded-[30px] max-w-[900px] h-[470px] lg:flex hidden border-2 ">
       <div id="slide1" className="video   relative w-screen">
-        <legend className="checkbox-group-legend flex justify-center ">
+        <legend className="checkbox-group-legend flex justify-center">
           TO DO LIST
         </legend>
-        <p className="flex justify-center text-gray-400 text-base font-sans mb-8">
-          {" "}
-          여기는 멋있는 문구로 소개란
-        </p>
-        <fieldset className="checkbox-group flex">
-          <div className="checkbox">
-            <label className="checkbox-wrapper">
-              <input type="checkbox" className="checkbox-input" />
-              <span className="checkbox-tile ">
-                <span className="checkbox-label">Schedule</span>
-              </span>
-            </label>
-          </div>
-          <div className="checkbox">
-            <label className="checkbox-wrapper">
-              <input type="checkbox" className="checkbox-input" />
-              <span className="checkbox-tile ">
-                <span className="checkbox-label">Ai</span>
-              </span>
-            </label>
-          </div>
+        <fieldset className="checkbox-group flex-col">
           <div className="checkbox">
             <label className="checkbox-wrapper">
               <input type="checkbox" className="checkbox-input" />
@@ -70,11 +50,12 @@ export default function Today() {
                     ></line>
                   </svg>
                 </span> */}
-                <span className="checkbox-label">Quizlet</span>
+                <span className="checkbox-label">
+                  오늘의 Quizlet을 다하셨나요?
+                </span>
               </span>
             </label>
           </div>
-
           <div className="checkbox">
             <label className="checkbox-wrapper">
               <input type="checkbox" className="checkbox-input" />
@@ -113,7 +94,9 @@ export default function Today() {
                     <circle cx="180" cy="75.99998" r="10"></circle>
                   </svg>
                 </span> */}
-                <span className="checkbox-label">Diary</span>
+                <span className="checkbox-label">
+                  오늘의 Diary를 작성했나요?
+                </span>
               </span>
             </label>
           </div>
