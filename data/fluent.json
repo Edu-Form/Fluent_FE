@@ -51,7 +51,7 @@
       "text": "test"
     }
   ],
-  "user":[
+  "user": [
     {
       "name": "Phil",
       "student": false
@@ -63,40 +63,184 @@
   ],
   "schedule": [
     {
-      "id": "8c8f",
-      "date": "2024. 9. 27.",
-      "time": "11:00",
-      "length": "1"
+      "id": "2ed2",
+      "calendarId": "cal1",
+      "title": "뭘봐",
+      "start": "2024-11-25T02:02:00",
+      "end": "2024-11-25T12:05:00"
     },
     {
-      "id": "5b63",
-      "date": "2024. 9. 17.",
-      "time": "00:01",
-      "length": "1"
+      "id": "79ee",
+      "calendarId": "cal1",
+      "title": "???",
+      "start": "2024-11-15T14:09:00",
+      "end": "2024-11-15T02:09:00"
     },
     {
-      "id": "4906",
-      "date": "2024. 10. 11.",
-      "time": "14:01",
-      "length": "1"
+      "id": "71cb",
+      "calendarId": "cal1",
+      "title": "1",
+      "start": "2024-11-25T12:46:00",
+      "end": "2024-11-25T12:49:00"
     },
     {
-      "id": "cedf",
-      "date": "2024. 10. 12.",
-      "time": "13:01",
-      "length": "1"
+      "id": "f7ad",
+      "calendarId": "cal1",
+      "room_name": "12",
+      "start": "2024-11-04T12:49:00",
+      "end": "2024-11-04T12:50:00"
     },
     {
-      "id": "bcf7",
-      "date": "2024. 10. 19.",
-      "time": "14:01",
-      "length": "2"
+      "id": "d3e3",
+      "calendarId": "cal1",
+      "title": "3333",
+      "start": "2024-11-25T00:47:00",
+      "end": "2024-11-25T13:47:00"
     },
     {
-      "id": "7a4b",
-      "date": "2024. 10. 23.",
-      "time": "02:12",
-      "length": "2"
+      "id": "305b",
+      "calendarId": "cal1",
+      "title": "890",
+      "start": "2024-11-25T04:06:00",
+      "end": "2024-11-25T05:06:00"
+    },
+    {
+      "id": "7921",
+      "calendarId": "cal1",
+      "title": "56789",
+      "start": "2024-11-25T06:06:00",
+      "end": "2024-11-25T07:06:00"
+    },
+    {
+      "id": "b273",
+      "calendarId": "cal1",
+      "title": "재민",
+      "start": "2024-11-03T09:01:52",
+      "end": "2024-11-03T10:01:52",
+      "teacher_name": "jaemin",
+      "student_name": "jamjam"
+    },
+    {
+      "id": "ecc4",
+      "calendarId": "cal1",
+      "title": "",
+      "start": "2024-11-03T21:02:09",
+      "end": "2024-11-03T22:02:09",
+      "teacher_name": "123",
+      "student_name": "546"
+    },
+    {
+      "id": "1c46",
+      "calendarId": "cal1",
+      "room_name": "206",
+      "time": {
+        "$numberInt": "6"
+      },
+      "duration": {
+        "$numberInt": "1"
+      },
+      "teacher_name": "123",
+      "student_name": "123"
+    },
+    {
+      "id": "59d0",
+      "calendarId": "cal1",
+      "room_name": "303",
+      "time": 7,
+      "duration": 1,
+      "teacher_name": "재민",
+      "student_name": "이젠"
+    },
+    {
+      "id": "af07",
+      "calendarId": "cal1",
+      "room_name": "206",
+      "time": 0,
+      "duration": 1,
+      "teacher_name": "12312312",
+      "student_name": "343645766"
+    },
+    {
+      "id": "faa5",
+      "calendarId": "cal1",
+      "room_name": "207",
+      "time": 0,
+      "duration": 1,
+      "teacher_name": "1231221",
+      "student_name": "34444"
+    },
+    {
+      "id": "f9d6",
+      "calendarId": "cal1",
+      "room_name": "23123",
+      "time": 1,
+      "duration": 1,
+      "teacher_name": "123",
+      "student_name": "123123"
+    },
+    {
+      "id": "e7ac",
+      "calendarId": "cal1",
+      "room_name": "123",
+      "date": "2024. 11. 9.",
+      "time": 0,
+      "duration": 1,
+      "teacher_name": "312321",
+      "student_name": "123123123"
+    },
+    {
+      "id": "5eb0",
+      "calendarId": "cal1",
+      "room_name": "206",
+      "date": "2024. 11. 21.",
+      "time": 0,
+      "duration": 1,
+      "teacher_name": "2342",
+      "student_name": "23432423432"
+    },
+    {
+      "id": "47ca",
+      "calendarId": "cal1",
+      "room_name": "213123",
+      "date": "2024. 11. 18.",
+      "time": 7,
+      "duration": 1,
+      "teacher_name": "123123",
+      "student_name": "21323"
+    },
+    {
+      "id": "2025",
+      "calendarId": "cal1",
+      "room_name": "206",
+      "date": "2024. 11. 24.",
+      "time": 0,
+      "duration": 1,
+      "teacher_name": "하하하",
+      "student_name": "재매재재맺ㅁ"
+    },
+    {
+      "id": "ef72",
+      "calendarId": "cal1",
+      "room_name": "2689",
+      "date": "2024. 11. 24.",
+      "time": 3,
+      "duration": 1,
+      "teacher_name": "필진",
+      "student_name": "재민",
+      "start": "2024-11-24T09:01:52",
+      "end": "2024-11-24T10:01:52"
+    },
+    {
+      "id": "a75d",
+      "calendarId": "cal1",
+      "room_name": "333",
+      "date": "2024. 11. 26.",
+      "time": 9,
+      "duration": 1,
+      "teacher_name": "잼",
+      "student_name": "킹",
+      "start": "2024-11-27T09:01:52",
+      "end": "2024-11-27T10:01:52"
     }
   ],
   "diary": [
@@ -160,36 +304,18 @@
     {
       "date": "2024. 9. 27.",
       "cards": [
-        [
-          "Today, I played soccer.",
-          "오늘은 축구를 했다"
-        ],
-        [
-          "It was fun.",
-          "재미있었다"
-        ],
-        [
-          "I want to play again.",
-          "또 하고 싶다."
-        ]
+        ["Today, I played soccer.", "오늘은 축구를 했다"],
+        ["It was fun.", "재미있었다"],
+        ["I want to play again.", "또 하고 싶다."]
       ],
       "id": "3a27"
     },
     {
       "date": "2024. 10. 03.",
       "cards": [
-        [
-          "Today was a holiday.",
-          "오늘은 공휴일이었다"
-        ],
-        [
-          "I had no friends.",
-          "나는 친구가 없었다"
-        ],
-        [
-          "What a sad day.",
-          "슬픈 날이었다."
-        ]
+        ["Today was a holiday.", "오늘은 공휴일이었다"],
+        ["I had no friends.", "나는 친구가 없었다"],
+        ["What a sad day.", "슬픈 날이었다."]
       ],
       "id": "6d54"
     }

@@ -40,17 +40,16 @@ export default function Page() {
 
   useEffect(() => {
     fetch(URL, { cache: "no-store" })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setClasses(data); // Set the fetched data to state
       });
   }, []); // Empty dependency array means this effect runs once after the initial render
 
-
   function userLogin() {
     fetch("http://localhost:3001/user")
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         for (const u in data) {
           if (data[u].name == username) {
             console.log("success");
@@ -124,7 +123,7 @@ export default function Page() {
                 id="username"
                 placeholder="Enter your username"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={e => setUsername(e.target.value)}
               />
             </div>
           </div>

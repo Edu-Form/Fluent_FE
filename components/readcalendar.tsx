@@ -221,17 +221,17 @@ const ScheduleDayContent = styled.div`
 `;
 
 export default function ReadCalendar({ dates }) {
-  const classes = dates.map((date) => ({
+  const classes = dates.map(date => ({
     date: new Date(date.date),
     time: date.time,
     length: date.length,
   }));
 
   // 특정 날짜에 수업 정보를 찾는 함수
-  const findScheduleForDay = (day) => {
+  const findScheduleForDay = day => {
     const dayString = day.toLocaleDateString();
     return classes.filter(
-      (schedule) => schedule.date.toLocaleDateString() === dayString
+      schedule => schedule.date.toLocaleDateString() === dayString,
     );
   };
 
@@ -241,7 +241,7 @@ export default function ReadCalendar({ dates }) {
         className=" text-lg "
         defaultMonth={classes[0]} // 첫 번째 날짜를 기본 달로 설정
         modifiers={{
-          booked: classes.map((c) => c.date), // 예약날짜
+          booked: classes.map(c => c.date), // 예약날짜
         }}
         modifiersClassNames={{
           booked: "mybookedclass", // 예약된 날짜에 커스텀 클래스 적용

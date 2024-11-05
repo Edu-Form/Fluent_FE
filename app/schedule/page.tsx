@@ -4,98 +4,118 @@ import EnterButton from "../../components/EnterButton/EnterButton";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-
-import { DayPicker } from "react-day-picker";
-import ReadCalendar from "../../components/readcalendar";
+import ToastUI from "../../components/ToastUI/ToastUI";
 import "react-day-picker/dist/style.css";
 import ScheduleTable from "../../components/scheduletable";
 import { ScheduleModal } from "../../components/ScheduleModal";
-import { set } from "date-fns";
 
 export default function Page() {
-  const [time, setTime] = useState("");
-  const [length, setLength] = useState("");
+  const [calendarId, setCalendarId] = useState("");
+  const [room_name, setRoomName] = useState(""); // room_name 상태 추가
+  const [time, setTime] = useState(0); // 시간 상태 추가
+  const [duration, setDuration] = useState(1); // 기본 지속 시간 1시간
+  const [teacher_name, setTeacherName] = useState(""); // teacher_name 상태 추가
+  const [student_name, setStudentName] = useState(""); // student_name 상태 추가
   const router = useRouter();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  //readcalendar
+
   const URL = "http://localhost:3001/schedule";
-  const [classes, setClasses] = useState([]);
+  const [classes, setClasses] = useState<any[]>([]); // classes의 타입 정의
 
   useEffect(() => {
-    fetch(URL, { cache: "no-store" })
-      .then((res) => res.json())
-      .then((data) => {
+    fetch(URL)
+      .then(res => res.json())
+      .then(data => {
         setClasses(data);
       });
   }, []);
 
-  //edit button
   const content = {
     submit: "submit",
     edit: "click Edit",
   };
 
-  // Calendar
   const [selected, setSelected] = useState<Date>(new Date());
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(time, length, selected);
-    const date = selected.toLocaleDateString();
+    // 선택된 날짜 포맷
+    const formattedDate = selected
+      .toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      })
+      .replace(/\./g, "."); // 2024. 9. 17 형식
+    // 시간 설정
+    const startDateTime = new Date(selected);
+    startDateTime.setHours(time);
 
-    // Because this is a client side (because we use 'use client on top'), so we don't have to add http in the api
-    await fetch("http://localhost:3001/schedule", {
-      method: "POST", // Method put is to create
+    // duration에 따라 종료 시간 설정
+    const endDateTime = new Date(startDateTime);
+    endDateTime.setHours(startDateTime.getHours() + duration);
+
+    // UTC로 변환
+    const startUTC = new Date(
+      startDateTime.getTime() + startDateTime.getTimezoneOffset() * 60000,
+    )
+      .toISOString()
+      .slice(0, -5);
+    const endUTC = new Date(
+      endDateTime.getTime() + endDateTime.getTimezoneOffset() * 60000,
+    )
+      .toISOString()
+      .slice(0, -5);
+    // 지속 시간을 설정
+    const durationValue = duration === 1 ? 1 : 2; // 1시간 또는 2시간 선택
+
+    await fetch(URL, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        date,
+        calendarId: "cal1",
+        room_name,
+        date: formattedDate, // 날짜 추가
         time,
-        length,
+        duration: durationValue,
+        teacher_name,
+        student_name,
       }),
     })
-      .then((res) => {
+      .then(res => {
         if (res.ok) {
-          // 요청이 성공한 경우
-          alert("완료되었습니다!"); // 완료 메시지
-          window.location.reload(); // 강제로 페이지 새로고침
+          alert("완료되었습니다!");
+          window.location.reload();
         } else {
           console.error("Submit failed");
         }
       })
-      .catch((e) => {
+      .catch(e => {
         console.log(e);
       });
   };
 
-  const URL1 = "http://localhost:3001/schedule?_sort=date";
-
-  const [schedules, setSchedules] = useState([]);
+  const URL1 = "http://localhost:3001/schedule?_sort=start";
+  const [schedules, setSchedules] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(URL1, { cache: "no-store" })
-      .then((res) => res.json())
-      .then((data) => {
+    fetch(URL1)
+      .then(res => res.json())
+      .then(data => {
         setSchedules(data);
       });
-  });
-
-  const bookedDays = [
-    new Date(2024, 8, 10),
-    new Date(2024, 8, 14),
-    new Date(2024, 8, 21),
-  ];
+  }, []);
 
   return (
     <div className="flex bg-gradient-to-b from-[#3f4166] to-[#292956]">
-      <div className="flex-col bg-white w-1/8 min-h-screen ">
+      <div className="flex-col bg-white w-1/8 min-h-screen">
         <div className="flex m-5 mb-14 justify-center">
-          <Link href="/" className="btn btn-ghost  text-xl font-['Playwrite']">
+          <Link href="/" className="btn btn-ghost text-xl font-['Playwrite']">
             Fluent
           </Link>
         </div>
@@ -108,30 +128,31 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="flex-1 flex justify-center items-center">
-        <div className="bg-white  relative w-[95%] h-[95%] rounded-xl p-5 shadow-lg shadow-black">
-          <div className="flex justify-center ">
-            <ReadCalendar dates={classes} />
-          </div>
+      <div className="flex-1 flex justify-center items-center max-w-full max-h-full overflow-auto">
+        <div className="bg-white w-[95%] h-[90%] max-w-full m-5 p-5 rounded-lg shadow-lg overflow-hidden">
+          <ToastUI data={classes} /> {/* 데이터 prop 전달 */}
         </div>
       </div>
-      {/* <ScheduleTable /> */}
 
       {isModalOpen && (
         <ScheduleModal
           selected={selected}
           setSelected={setSelected}
+          room_name={room_name}
+          setRoomName={setRoomName}
           time={time}
           setTime={setTime}
-          length={length}
-          setLength={setLength}
+          duration={duration}
+          setDuration={setDuration}
+          teacher_name={teacher_name}
+          setTeacherName={setTeacherName}
+          student_name={student_name}
+          setStudentName={setStudentName}
           handleSubmit={handleSubmit}
           content={content}
-          closeModal={closeModal} // 모달 닫기 함수 전달
+          closeModal={closeModal}
         />
       )}
-
-      {/* 여기까지  */}
     </div>
   );
 }
