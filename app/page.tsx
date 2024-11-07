@@ -23,17 +23,15 @@ import { access } from "fs";
 
 import AddRoom from "components/addroom";
 
-
-
 export default function Page() {
-  const URL = "http://localhost:3001/schedule";
+  const URL = "http://43.201.252.152/schedules/teacher/Phil/";
   const [classes, setClasses] = useState([]);
   const searchparams = useSearchParams();
   const [username, setUsername] = useState("");
   const user = searchparams.get("user");
   const student = searchparams.get("student");
-  const [access_token, setAccess_token] = useState("")
-  const access_token_info = searchparams.get("access_token")
+  const [access_token, setAccess_token] = useState("");
+  const access_token_info = searchparams.get("access_token");
   const router = useRouter();
 
   const content = {
@@ -49,13 +47,12 @@ export default function Page() {
     fetch(URL, { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
+        console.log("data 은? ", data);
         setClasses(data); // Set the fetched data to state
       });
   }, []); // Empty dependency array means this effect runs once after the initial render
 
-
-
-  // Function that triggers when you click Login. 
+  // Function that triggers when you click Login.
   function userLogin(access_token) {
     fetch("http://localhost:3001/user")
       .then((res) => res.json())
@@ -63,7 +60,9 @@ export default function Page() {
         for (const u in data) {
           if (data[u].name == username) {
             console.log(access_token);
-            router.push(`/?user=${data[u].name}&student=${data[u].student}&access_token=${access_token}`);
+            router.push(
+              `/?user=${data[u].name}&student=${data[u].student}&access_token=${access_token}`
+            );
             return;
           }
         }
@@ -72,56 +71,57 @@ export default function Page() {
   }
 
   function Quizlet() {
-    router.push(`/quizlet?user=${user}&student=${student}&access_token=${access_token_info}`)
+    router.push(
+      `/quizlet?user=${user}&student=${student}&access_token=${access_token_info}`
+    );
   }
 
   function Diary() {
-    router.push(`/diary?access_token=${access_token_info}`)
+    router.push(`/diary?access_token=${access_token_info}`);
   }
 
   function Schedule() {
-    router.push(`/diary?access_token=${access_token_info}`)
+    router.push(`/diary?access_token=${access_token_info}`);
   }
 
-
-  const url = 'https://fluentenglish.odooserver.sk/api/v1/token';
+  const url = "https://fluentenglish.odooserver.sk/api/v1/token";
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
-      username: 'Phil',
-      password: 'Phil',
+      username: "Phil",
+      password: "Phil",
     }),
   };
 
-
-  async function TestLogin(){
+  async function TestLogin() {
     const response = await fetch(url, options);
     const data = await response.json();
-    
-    setAccess_token(data.access_token);
-    
-    userLogin(data.access_token);
-	}  
 
-  const url1 = 'https://fluentenglish.odooserver.sk/api/v1/search_read?model=lea.student&fields=name&domain=%5B%28%27name%27%2C%20%27%3D%27%2C%20%27%EA%B6%8C%EC%84%B1%EB%B3%B5%27%29%5D';
+    setAccess_token(data.access_token);
+
+    userLogin(data.access_token);
+  }
+
+  const url1 =
+    "https://fluentenglish.odooserver.sk/api/v1/search_read?model=lea.student&fields=name&domain=%5B%28%27name%27%2C%20%27%3D%27%2C%20%27%EA%B6%8C%EC%84%B1%EB%B3%B5%27%29%5D";
   const options1 = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaGlsIiwiaWF0IjoxNzMwMTEwOTM5LCJleHAiOjE3MzAxMTQ1Mzl9.USWIO38JzYjp5aylkAcHCurRcQEr2JNcMKC-Pr8YUG0'
-    }
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQaGlsIiwiaWF0IjoxNzMwMTEwOTM5LCJleHAiOjE3MzAxMTQ1Mzl9.USWIO38JzYjp5aylkAcHCurRcQEr2JNcMKC-Pr8YUG0",
+    },
   };
 
-
-  async function TestSearchRead(){
+  async function TestSearchRead() {
     const response = await fetch(url1, options1)
-    .then(response => response.json())
-    .then(data => console.log(data))
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }
 
   return user ? (
@@ -159,7 +159,7 @@ export default function Page() {
     ) : (
       <div className="flex flex-col justify-center ">
         <div className="flex justify-around   m-2 gap-20 ">
-            <AddRoom />
+          <AddRoom />
         </div>
       </div>
     )
